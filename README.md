@@ -1,2 +1,3 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Sabshor/java-project-78/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Sabshor/java-project-78/actions)
+[![gradle workflow](https://github.com/Sabshor/java-project-78/actions/workflows/gradle.yml/badge.svg)](https://github.com/Sabshor/java-project-78/actions/workflows/gradle.yml)
