@@ -1,17 +1,19 @@
 package hexlet.code;
 
-public class Validator implements ValidateSchema {
-    //private ValidateSchema validateSchema;
+import hexlet.code.schemes.NumberSchema;
+import hexlet.code.schemes.StringSchema;
+
+public class Validator {
     private Validator validator;
     private Integer minLength;
    // private boolean isRequired;
 
-   /* public Validator() {
-        validateSchema = new Validator();
-    }*/
-
     public StringSchema string() {
         return new StringSchema();
+    }
+
+    public NumberSchema number() {
+        return new NumberSchema();
     }
 
 }

@@ -1,7 +1,6 @@
-package hexlet.code;
+package hexlet.code.schemes;
 
-public class StringSchema implements ValidateSchema {
-    //private StringSchema stringSchema;
+public class StringSchema extends BaseSchema<StringSchema> {
     private int min;
     private boolean isRequired;
     private String subString = "";
@@ -12,20 +11,19 @@ public class StringSchema implements ValidateSchema {
     }
 
     public StringSchema required() {
-        //StringSchema stringSchema = this;
         this.isRequired = true;
         return this;
     }
 
     public StringSchema contains(String contain) {
-        //StringSchema stringSchema = this;
         this.subString = contain;
         return this;
     }
 
-    public boolean isValid(String text) {
+    @Override
+    public boolean isValid(Object checkValue) {
         boolean isValidate = true;
-        String textValidate = text == null ? "" : text;
+        String textValidate = checkValue == null ? "" : checkValue.toString();
         if ((min > 0) && (!textValidate.isEmpty())) {
             isValidate = textValidate.length() >= min;
         }
