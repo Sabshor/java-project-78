@@ -1,15 +1,21 @@
 package hexlet.code.schemes;
 
 public class NumberSchema extends BaseSchema<NumberSchema> {
-    private boolean isRequired;
+    //private boolean isRequired;
     private boolean isPositive;
     private Integer minRange;
     private Integer maxRange;
 
-    public NumberSchema required() {
+   /* public NumberSchema required_() {
         this.isRequired = true;
         return this;
     }
+*/
+    /*@Override
+    public NumberSchema required() {
+        this.isRequired = true;
+        return this;
+    }*/
 
     public NumberSchema positive() {
         this.isPositive = true;
@@ -27,10 +33,7 @@ public class NumberSchema extends BaseSchema<NumberSchema> {
         boolean isValidate = true;
         Integer value = (Integer) checkValue;
         if (value == null) {
-            if (isRequired) {
-                isValidate = false;
-            }
-            return isValidate;
+            return !isRequired();
         }
         if (isPositive) {
             isValidate = value > 0;
@@ -52,7 +55,7 @@ public class NumberSchema extends BaseSchema<NumberSchema> {
     public String toString() {
         return "NumberSchema with min=" + minRange
                 + "; max=" + maxRange
-                + "; isRequired=" + isRequired
+                + "; isRequired=" + isRequired()
                 + "; isPositive=" + isPositive;
     }
 }
