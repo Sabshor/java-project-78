@@ -5,15 +5,15 @@ public final class NumberSchema extends BaseSchema<Integer> {
     private Integer minRange;
     private Integer maxRange;
 
-    /*@Override
+    @Override
     public NumberSchema required() {
         return (NumberSchema) super.required();
-    }*/
-    @Override
+    }
+    /*@Override
     public NumberSchema required() {
         super.isRequired = true;
         return this;
-    }
+    }*/
 
     public NumberSchema positive() {
         this.isPositive = true;
