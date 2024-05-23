@@ -3,17 +3,17 @@ package hexlet.code.schemas;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapSchema extends BaseSchema {
+public class MapSchema<T> extends BaseSchema<Map<String, T>> {
     public Integer sizeMap;
 
-    public Map<String, BaseSchema> rules = new HashMap<>();
+    public Map<String, BaseSchema<T>> rules = new HashMap<>();
 
     public MapSchema sizeof(int size) {
         sizeMap = size;
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema> schemas) {
+    public MapSchema shape(Map<String, BaseSchema<T>> schemas) {
         rules = new HashMap<>(schemas);
         return this;
     }
@@ -32,7 +32,7 @@ public class MapSchema extends BaseSchema {
             if (rules != null) {
                 isValidate = rules.entrySet().stream()
                         .allMatch((e) -> {
-                            BaseSchema rule = e.getValue();
+                            BaseSchema<T> rule = e.getValue();
                             return rule.isValid(map.get(e.getKey()));
                         });
             }
