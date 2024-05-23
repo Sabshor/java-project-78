@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class BaseSchema<T> {
+public abstract class BaseSchema<T> {
     private boolean isRequired;
 
     public BaseSchema<T> required() {
