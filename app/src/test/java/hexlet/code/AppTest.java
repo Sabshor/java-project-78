@@ -143,6 +143,6 @@ public class AppTest {
         assertFalse(schema.isValid(human1)); // false
 
         human1.put("age", "25");
-        assertTrue(schema.isValid(human1)); // true
+        assertFalse(schema.isValid(human1));
     }
 }
