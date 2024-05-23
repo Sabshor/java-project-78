@@ -5,9 +5,14 @@ public final class NumberSchema extends BaseSchema<Integer> {
     private Integer minRange;
     private Integer maxRange;
 
-    @Override
+    /*@Override
     public NumberSchema required() {
         return (NumberSchema) super.required();
+    }*/
+    @Override
+    public NumberSchema required() {
+        super.isRequired = true;
+        return this;
     }
 
     public NumberSchema positive() {
@@ -27,7 +32,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
         Integer value = checkValue == null ? null : Integer.valueOf(checkValue.toString());
         //Integer value = (Integer) checkValue;
         if (value == null) {
-            return !isRequired();
+            return !isRequired;
         }
         if (isPositive) {
             isValidate = value > 0;
@@ -49,7 +54,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
     public String toString() {
         return "NumberSchema with min=" + minRange
                 + "; max=" + maxRange
-                + "; isRequired=" + isRequired()
+                + "; isRequired=" + isRequired
                 + "; isPositive=" + isPositive;
     }
 }

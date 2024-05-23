@@ -1,18 +1,13 @@
 package hexlet.code.schemas;
 
 public abstract class BaseSchema<T> {
-    private boolean isRequired;
+    protected boolean isRequired;
 
-    public BaseSchema<T> required() {
+    public abstract BaseSchema<T> required();
+   /* public BaseSchema<T> required() {
         this.isRequired = true;
         return this;
-    }
+    }*/
 
-    public boolean isRequired() {
-        return this.isRequired;
-    }
-
-    public boolean isValid(Object checkValue) {
-        return true;
-    }
+    public abstract boolean isValid(Object checkValue);
 }

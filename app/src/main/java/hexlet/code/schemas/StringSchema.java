@@ -13,9 +13,14 @@ public final class StringSchema extends BaseSchema<String> {
         this.subString = contain;
         return this;
     }
-    @Override
+    /*@Override
     public StringSchema required() {
         return (StringSchema) super.required();
+    }*/
+    @Override
+    public StringSchema required() {
+        super.isRequired = true;
+        return this;
     }
 
     @Override
@@ -23,7 +28,7 @@ public final class StringSchema extends BaseSchema<String> {
         boolean isValidate = true;
         String textValidate = checkValue == null ? "" : checkValue.toString();
         if (textValidate.isEmpty()) {
-            return !isRequired();
+            return !isRequired;
         }
         if (min > 0) {
             isValidate = textValidate.length() >= min;
@@ -37,6 +42,6 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public String toString() {
-        return "StringSchema with min=" + min + "; isRequired=" + isRequired() + "; contains=" + subString;
+        return "StringSchema with min=" + min + "; isRequired=" + isRequired + "; contains=" + subString;
     }
 }

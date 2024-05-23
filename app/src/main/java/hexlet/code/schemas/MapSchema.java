@@ -8,6 +8,12 @@ public final class MapSchema<T> extends BaseSchema<Map<String, T>> {
 
     public Map<String, BaseSchema<T>> rules = new HashMap<>();
 
+    @Override
+    public BaseSchema<Map<String, T>> required() {
+        super.isRequired = true;
+        return this;
+    }
+
     public MapSchema sizeof(int size) {
         sizeMap = size;
         return this;
@@ -18,12 +24,14 @@ public final class MapSchema<T> extends BaseSchema<Map<String, T>> {
         return this;
     }
 
+
+
     @Override
     public boolean isValid(Object checkValue) {
         boolean isValidate = true;
         HashMap<?, ?> map = (HashMap<?, ?>) checkValue;
         if (map == null) {
-            return !isRequired();
+            return !isRequired;
         }
         if (sizeMap != null) {
             isValidate = map.size() == sizeMap;
