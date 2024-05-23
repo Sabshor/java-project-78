@@ -9,7 +9,7 @@ public final class MapSchema<T> extends BaseSchema<Map<String, T>> {
     private Map<String, BaseSchema<T>> rules = new HashMap<>();
 
     @Override
-    public BaseSchema<Map<String, T>> required() {
+    public MapSchema required() {
         super.isRequired = true;
         return this;
     }
