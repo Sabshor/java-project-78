@@ -13,15 +13,15 @@ public final class StringSchema extends BaseSchema<String> {
         this.subString = contain;
         return this;
     }
-    @Override
+    /*@Override
     public StringSchema required() {
         return (StringSchema) super.required();
-    }
-    /*@Override
+    }*/
+    @Override
     public StringSchema required() {
         super.isRequired = true;
         return this;
-    }*/
+    }
 
     @Override
     public boolean isValid(Object checkValue) {
