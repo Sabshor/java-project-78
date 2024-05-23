@@ -1,8 +1,7 @@
-package hexlet.code.schemes;
+package hexlet.code.schemas;
 
-public class StringSchema extends BaseSchema<StringSchema> {
+public class StringSchema extends BaseSchema {
     private int min;
-   // private boolean isRequired;
     private String subString = "";
 
     public StringSchema minLength(int length) {
@@ -10,14 +9,13 @@ public class StringSchema extends BaseSchema<StringSchema> {
         return this;
     }
 
-   /* public StringSchema required_() {
-        this.isRequired = true;
-        return this;
-    }**/
-
     public StringSchema contains(String contain) {
         this.subString = contain;
         return this;
+    }
+    @Override
+    public StringSchema required() {
+        return (StringSchema) super.required();
     }
 
     @Override

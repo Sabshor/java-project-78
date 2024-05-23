@@ -1,10 +1,12 @@
 package hexlet.code;
 
-import hexlet.code.schemes.NumberSchema;
-import hexlet.code.schemes.StringSchema;
+import hexlet.code.schemas.BaseSchema;
+import hexlet.code.schemas.NumberSchema;
+import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -97,5 +99,50 @@ public class AppTest {
         assertTrue(schema2.isValid(data2));  // true
         schema.sizeof(1);
         assertTrue(schema2.isValid(data2));  // true
+    }
+
+    @Test
+    public void testShapeMapSchema() {
+        var v = new Validator();
+        var schema = v.map();
+
+        //Map<String, BaseSchema<String>> schemas = new HashMap<>();
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("firstName", v.string().required());
+        schemas.put("lastName", v.string().required().minLength(2));
+
+        schema.shape(schemas);
+
+        Map<String, String> human1 = new HashMap<>();
+        human1.put("firstName", "John");
+        human1.put("lastName", "Smith");
+        assertTrue(schema.isValid(human1)); // true
+
+        Map<String, String> human2 = new HashMap<>();
+        human2.put("firstName", "John");
+        human2.put("lastName", null);
+        assertFalse(schema.isValid(human2)); // false
+
+        Map<String, String> human3 = new HashMap<>();
+        human3.put("firstName", "Anna");
+        human3.put("lastName", "B");
+        assertFalse(schema.isValid(human3)); // false
+
+        Map<String, BaseSchema> schemas2 = new HashMap<>();
+        schemas2.put("firstName", v.string().required());
+        schemas2.put("lastName", v.string().required().minLength(2));
+        schemas2.put("age", v.number());
+        schema.shape(schemas2);
+        assertTrue(schema.isValid(human1)); // true
+
+        Map<String, BaseSchema> schemas3 = new HashMap<>();
+        schemas3.put("firstName", v.string().required());
+        schemas3.put("lastName", v.string().required().minLength(2));
+        schemas3.put("age", v.number().required().range(10, 20));
+        schema.shape(schemas3);
+        assertFalse(schema.isValid(human1)); // false
+
+        human1.put("age", "25");
+        assertTrue(schema.isValid(human1)); // true
     }
 }
