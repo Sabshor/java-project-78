@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class MapSchema<T> extends BaseSchema<Map<String, T>> {
-    public Integer sizeMap;
+    private Integer sizeMap;
 
-    public Map<String, BaseSchema<T>> rules = new HashMap<>();
+    private Map<String, BaseSchema<T>> rules = new HashMap<>();
 
     @Override
     public BaseSchema<Map<String, T>> required() {
