@@ -147,5 +147,10 @@ public class AppTest {
 
         human1.put("age", "25");
         assertFalse(schema.isValid(human1));
+
+        Map<String, Object> human4 = new HashMap<>();
+        human4.put("name", "Test");
+        human4.put("age", -1);
+        assertFalse(schema.isValid(human4));
     }
 }
