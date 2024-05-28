@@ -1,47 +1,32 @@
 package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema<String> {
-    private int min;
-    private String subString = "";
+    private static final String CHECK_CONTAINS_CAPTION = "contains";
+    private static final String CHECK_MIN_LENGTH_CAPTION = "minLength";
 
-    public StringSchema minLength(int length) {
-        this.min = length;
+    public StringSchema minLength(int min) {
+        addCheck(CHECK_MIN_LENGTH_CAPTION, checkValue -> {
+            String textValidate = checkValue == null ? "" : checkValue.toString();
+            if (min > 0) {
+                return textValidate.length() >= min;
+            }
+            return true;
+        });
         return this;
     }
 
     public StringSchema contains(String contain) {
-        this.subString = contain;
-        return this;
-    }
-    /*@Override
-    public StringSchema required() {
-        return (StringSchema) super.required();
-    }*/
-    @Override
-    public StringSchema required() {
-        super.isRequired = true;
-        return this;
-    }
-
-    @Override
-    public boolean isValid(Object checkValue) {
-        boolean isValidate = true;
-        String textValidate = checkValue == null ? "" : checkValue.toString();
-        if (textValidate.isEmpty()) {
-            return !isRequired;
-        }
-        if (min > 0) {
-            isValidate = textValidate.length() >= min;
-        }
-        if (isValidate) {
-            if (!subString.isEmpty()) {
-                isValidate = textValidate.contains(subString);
+        addCheck(CHECK_CONTAINS_CAPTION, checkValue -> {
+            if (checkValue == null) {
+                return true;
             }
-        }
-        return isValidate;
+            return checkValue.toString().contains(contain);
+        });
+        return this;
     }
 
-    public String toString() {
-        return "StringSchema with min=" + min + "; isRequired=" + isRequired + "; contains=" + subString;
+    public StringSchema required() {
+        isRequired = true;
+        return this;
     }
 }

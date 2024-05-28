@@ -34,7 +34,7 @@ public class App {
         Map<String, String> human1 = new HashMap<>();
         human1.put("firstName", "John");
         human1.put("lastName", "Smith");
-        System.out.println(schemaM.isValid(human1)); // true*/
+        System.out.println(schemaM.isValid(human1)); // true
 
         //Map<String, BaseSchema<?>> schemas2 = new HashMap<>();
         Map<String, BaseSchema> schemas2 = new HashMap<>();

@@ -69,6 +69,9 @@ public class AppTest {
         assertTrue(schema.isValid(10)); // true
         assertFalse(schema.isValid(4)); // false
         assertFalse(schema.isValid(11)); // false
+
+        var schema2 = v.number().required().range(10, 20);
+        assertTrue(schema2.isValid(15)); // true
     }
 
     @Test
