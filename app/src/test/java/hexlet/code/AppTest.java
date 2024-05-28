@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import hexlet.code.schemas.BaseSchema;
+import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
@@ -156,5 +157,18 @@ public class AppTest {
         human4.put("value", "Test");
         human4.put("num", -1);
         assertFalse(schema.isValid(human4));
+    }
+
+    @Test
+    public void sizeTest() {
+        var validator = new Validator();
+        MapSchema mapSchema = validator.map();
+        var data = new HashMap<String, String>();
+        data.put("key1", "value1");
+        mapSchema.sizeof(2);
+        assertFalse(mapSchema.isValid(data));
+        data.put("key2", "value2");
+        assertTrue(mapSchema.isValid(data));
+        assertTrue(mapSchema.isValid(null));
     }
 }

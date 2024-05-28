@@ -13,7 +13,12 @@ public final class MapSchema<T> extends BaseSchema<Map<String, T>> {
     }
 
     public MapSchema sizeof(Integer sizeMap) {
-        addCheck(CHECK_SIZE_OF_CAPTION, m -> ((Map<String, T>) m).size() == sizeMap);
+        addCheck(CHECK_SIZE_OF_CAPTION, map -> {
+            if (map == null) {
+                return true;
+            }
+            return ((Map<String, T>) map).size() == sizeMap;
+        });
         return this;
     }
 
