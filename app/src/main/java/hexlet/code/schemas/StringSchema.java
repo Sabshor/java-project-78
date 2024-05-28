@@ -6,11 +6,10 @@ public final class StringSchema extends BaseSchema<String> {
 
     public StringSchema minLength(int min) {
         addCheck(CHECK_MIN_LENGTH_CAPTION, checkValue -> {
-            String textValidate = checkValue == null ? "" : checkValue.toString();
-            if (min > 0) {
-                return textValidate.length() >= min;
+            if (checkValue == null) {
+                return true;
             }
-            return true;
+            return checkValue.toString().length() >= min;
         });
         return this;
     }
