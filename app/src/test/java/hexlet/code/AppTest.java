@@ -73,6 +73,16 @@ public class AppTest {
 
         var schema2 = v.number().required().range(10, 20);
         assertTrue(schema2.isValid(15)); // true
+
+        var schema3 = v.number();
+        schema3.range(5, 10);
+        assertTrue(schema3.isValid(5));
+        assertTrue(schema3.isValid(null));
+        assertTrue(schema3.isValid(10));
+        schema3.range(10, 5);
+        assertFalse(schema3.isValid(6));
+        schema3.range(-8, -3);
+        assertTrue(schema3.isValid(-6));
     }
 
     @Test
@@ -149,20 +159,27 @@ public class AppTest {
         human1.put("age", "25");
         assertFalse(schema.isValid(human1));
 
-        /*Map<String, BaseSchema> schemas4 = new HashMap<>();
+        Map<String, BaseSchema> schemas4 = new HashMap<>();
         schemas4.put("value", v.string().minLength(4));
         schemas4.put("num", v.number().required().positive().range(10, 20));
         schema.shape(schemas4);
         Map<String, Object> human4 = new HashMap<>();
         human4.put("value", "Test");
         human4.put("num", -1);
-        assertFalse(schema.isValid(human4));*/
+        assertFalse(schema.isValid(human4));
+
+        Validator v2 = new Validator();
+        MapSchema schema5 = v2.map();
+        schema5.required().sizeof(3);
+
+        assertFalse(schema5.isValid(null));
+        assertFalse(schema5.isValid(new HashMap<>()));
     }
 
     @Test
     public void sizeTest() {
-        var validator = new Validator();
-        MapSchema mapSchema = validator.map();
+        Validator v = new Validator();
+        MapSchema mapSchema = v.map();
         var data = new HashMap<String, String>();
         data.put("key1", "value1");
         mapSchema.sizeof(2);
